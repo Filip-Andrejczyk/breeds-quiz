@@ -1,0 +1,76 @@
+<div>
+  <div class="rowe">
+
+    <div class="col-10 column">
+      <div class="napis-tryb">
+        <h3>{{trybHard ? napisTrudny : napisLatwy }}</h3>
+      </div>
+
+      <table class="table table-hover content-table">
+
+        <thead>
+        <tr>
+          <th class="col-1">#</th>
+          <th class="col-1">Name</th>
+          <th class="col-1">Score</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let y = index; let gracz of (trybHard ? (tablicaTrybTrudny$ | async) : rekordy)">
+          <td class="col-1">{{y + 1}}</td>
+          <td class="col-1">{{gracz.name}}</td>
+          <td class="col-1">{{gracz.score}}</td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+    <div class="col-2 column-del">
+      <h3>&nbsp;</h3>
+      <table class="table content-table-remove" *ngIf="kliknietoEdytuj && przegrana">
+
+        <thead>
+        <tr>
+          <th class="col-1">&nbsp;</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let nr = index; let z of (trybHard ? (tablicaTrybTrudny$ | async) : rekordy)">
+          <td class="col-1">
+              <fa-icon
+                       [icon]="faTimes"
+                       (click)="usunRekord(z.name,z.$key, this.trybHard, nr)"
+                       [ngStyle]="{'color': 'red'}">
+              </fa-icon>
+          </td>
+        </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+<ng-container *ngIf="graRunning === false">
+  <div class="col col-11 d-flex align-items-center he">
+    <button class="btn btn-primary shadow-none float-start ms-4" (click)="edytujClikc()">Edit</button>
+    <div class="tekst-ostrzegawczy ms-2" *ngIf="!prawidlowyGracz">
+      <small>{{statusUsuniecia}}</small>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</ng-container>
+
+<!--<ng-template #zlyGraczTemplate>-->
+<!--    <div class="col col-11 d-flex align-items-center he">-->
+<!--      <button class="btn btn-primary shadow-none float-start" (click)="edytujClikc()">Edytuj</button>-->
+<!--      <small>{{statusUsuniecia}}</small>-->
+<!--    </div>-->
+<!--    <div class="col-1"></div>-->
+<!--</ng-template>-->
+
