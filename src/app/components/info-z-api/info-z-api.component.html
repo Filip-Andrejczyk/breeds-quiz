@@ -14,13 +14,13 @@
       <div class="row justify-content-center">
         <div class="obrazekpieska">
           <img class="border border-success" [src]="(doggoImgPath$ | async)" alt=""/>
-        </div>
-        <ng-container *ngIf="!trybTrudny">
+          <div *ngIf="!trybTrudny" [ngStyle]="{'max-height': '150px', 'text-align': 'center'}">
             <button class="przycisk btn-success shadow-none" (click)="nextPieselekPrzycisk()" [disabled]="koniecPomijania">Skip dog</button><br>
             <div class="fw-bold mt-1 text-center">
               left over: {{zostaloPominiec}}
             </div>
-        </ng-container>
+          </div>
+        </div>
       </div>
     </div>
 
