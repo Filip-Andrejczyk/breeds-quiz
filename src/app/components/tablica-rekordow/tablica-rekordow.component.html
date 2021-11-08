@@ -20,38 +20,43 @@
         <tr *ngFor="let y = index; let gracz of (trybHard ? (tablicaTrybTrudny$ | async) : rekordy)">
           <td class="col-1">{{y + 1}}</td>
           <td class="col-1">{{gracz.name}}</td>
-          <td class="col-1">{{gracz.score}}</td>
-        </tr>
-        </tbody>
-
-      </table>
-    </div>
-
-    <div class="col-2 column-del">
-      <h3>&nbsp;</h3>
-      <table class="table content-table-remove" *ngIf="kliknietoEdytuj && przegrana">
-
-        <thead>
-        <tr>
-          <th class="col-1">&nbsp;</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr *ngFor="let nr = index; let z of (trybHard ? (tablicaTrybTrudny$ | async) : rekordy)">
-          <td class="col-1">
-              <fa-icon
-                       [icon]="faTimes"
-                       (click)="usunRekord(z.name,z.$key, this.trybHard, nr)"
-                       [ngStyle]="{'color': 'red'}">
-              </fa-icon>
+          <td class="col-1 position-relative">
+            {{gracz.score}}
+            <fa-icon
+              *ngIf="kliknietoEdytuj && przegrana"
+              class="position-absolute"
+              [icon]="faTimes"
+              (click)="usunRekord(gracz.name,gracz.$key, this.trybHard, y)"
+              [ngStyle]="{'color': 'red', 'right': '-25px'}">
+            </fa-icon>
           </td>
         </tr>
         </tbody>
 
       </table>
-
     </div>
+
+<!--    <div class="col-2 column-del">-->
+<!--      <h3>&nbsp;</h3>-->
+<!--      <table class="table content-table-remove" *ngIf="kliknietoEdytuj && przegrana">-->
+
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th class="col-1">&nbsp;</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+
+<!--        <tbody>-->
+<!--        <tr *ngFor="let nr = index; let z of (trybHard ? (tablicaTrybTrudny$ | async) : rekordy)">-->
+<!--          <td class="col-1">-->
+<!--              -->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+
+<!--      </table>-->
+
+<!--    </div>-->
 
   </div>
 </div>
